@@ -1,26 +1,73 @@
-type menuList={title: string,items: string[]}[];
-let menuList: menuList = [
-    {title: 'JavaScript', items: ['Ember', 'Angular2']},
-    {title: 'Dart', items: ['Angular2', 'Polymer']},
-];
+'use strict'
 
+type menuItem = { title: string, items?: menuItem[] }
+type menuList = { title: string, items?: menuItem[]}[]
 
-function generateMenu(list: menuList): string {
-    let z: string = `<ul>`;
-    for (let a of list) {
-        z += `<li><a class="title">${a.title}</a>`;
-        z += `<ul>`;
-        for (let item of a.items) {
-            z += `<li><a>${item}</a></li>`
-        }
-        z += `</li></ul>`
+let menu: menuList = [
+    {
+        title: 'Infernum', items: [
+        {
+            title: 'Ascensionе', items: [
+            {title: 'Tubingaы', items: [
+                    {title: 'Buboе'},
+                    {title: 'Nixus'},
+                    {title: 'Wonderland', items: [
+                            {title: 'Gandavum'},
+                            {title: 'Antverpi'}
+                        ]
+                    },
+                    {title: 'Love'}
+                ]
+            },
+            {title: 'Chremisa'},
+            {title: 'Heu, extum!'},
+            {title: 'Oddly'}
+        ]
+        },
+        {
+            title: 'Danista', items: [
+            {title: 'Quadrata'},
+            {title: 'Hafnia'},
+            {title: 'Lentia'},
+        ],
+        },
+    ]
+    },
+    {
+        title: 'Elevatus', items: [
+        {
+            title: 'Ubi est', items: [
+            {title: 'Adiurator'},
+            {title: 'Spatii'}
+        ]
+        },
+        {
+            title: 'Calceus', items: [
+            {title: 'Caculas'}
+        ]
+        },
+    ]
     }
-    z += `</ul>`;
-    return z;
+]
+
+
+function generateMenu(list: menuList):string {
+    let z: string = `<ul>`
+    for (let listItem of list) {
+        z += `<li><a class='title'>${listItem.title}</a>`
+        if (listItem.items) {
+            z += generateMenu(listItem.items)
+        }
+        z+=`</li>`
+    }
+    z += `</ul>`
+
+    return z
 }
 
+
 let navMenuList = document.querySelector('.menu') as HTMLElement;
-navMenuList.innerHTML = generateMenu(menuList);
+navMenuList.innerHTML = generateMenu(menu);
 
 navMenuList.onclick = (e: MouseEvent)=> {
     let el = e.target as HTMLElement;
