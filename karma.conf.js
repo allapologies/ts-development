@@ -1,5 +1,4 @@
-// Karma configuration
-// Generated on Sat Oct 29 2016 16:39:16 GMT+0300 (MSK)
+var webpackConfig = require('./webpack.config.js');
 
 module.exports = function(config) {
   config.set({
@@ -12,7 +11,11 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
 
+    webpack: webpackConfig,
 
+    webpackMiddleware: {
+      noInfo:true
+    },
     // list of files / patterns to load in the browser
     files: [
       'tests/**/*.spec.js'
@@ -27,8 +30,11 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      './tests/*.spec.js': ['webpack']
     },
-
+    plugins: [
+      'karma-jasmine', 'karma-chrome-launcher', 'karma-webpack'
+    ],
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
