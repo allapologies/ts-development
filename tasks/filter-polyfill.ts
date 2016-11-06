@@ -1,7 +1,8 @@
-type cbType = (element: number, index? : number) => boolean
+type elementType = number | string
+type callbackType = (element: elementType, index : number) => boolean
 
-Array.prototype.myFilter = function (callback: cbType) : number[] {
-    let filteredArray :number[] = []
+Array.prototype.myFilter = function (callback: callbackType) : elementType[] {
+    let filteredArray :elementType[] = []
     for (let i = 0; i< this.length; i++) {
         if (callback(this[i], i)) {
             filteredArray.push(this[i])
