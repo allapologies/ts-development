@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --config webpack.config.js",
+    "test": "node node_modules/karma/bin/karma start --single-run --browsers PhantomJS karma.config.js",
+    "test:watch": "node node_modules/karma/bin/karma start --browsers Chrome karma.conf.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +32,8 @@
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-webpack": "^1.8.0",
-    "webpack": "^1.13.2"
+    "ts-loader": "^0.8.2",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
   }
 }

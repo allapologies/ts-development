@@ -1,25 +1,30 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-  output: {
-    path: __dirname,
-    publicPath: '/',
+  entry: './app.ts',
+  output : {
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
-  module: {
+  devtool : 'source-map',
+  watch: true,
+  module : {
     loaders: [
-      { test: /\.spec\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015'],
-          cacheDirectory: true
-        }
+      {
+        test: /\.tsx?$/, loader: 'ts-loader'
       },
     ]
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.ts', '.tsx']
+  },
+  devServer: {
+    contentBase: './build',
+    hot: true,
+    stats: {
+      chunks: false,
+      colors: true
+    }
   }
-};
+}
